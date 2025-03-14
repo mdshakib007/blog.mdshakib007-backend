@@ -57,6 +57,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'blog_mdshakib007.urls'
 
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5500",
     "http://127.0.0.1:8000",
@@ -80,7 +83,6 @@ CORS_ALLOW_HEADERS = [
     "Authorization",
     "X-Requested-With",
 ]
-CORS_ALLOW_ALL_ORIGINS = True
 
 
 REST_FRAMEWORK = {
@@ -105,7 +107,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'blog_mdshakib007.wsgi.application'
+WSGI_APPLICATION = 'blog_mdshakib007.wsgi.app'
 
 
 # Database
