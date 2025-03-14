@@ -15,16 +15,12 @@ DEBUG = env.bool("DEBUG", default=False)
 
 ALLOWED_HOSTS = [
     "mdshakib007.vercel.app",
-    "blog.mdshakib007.vercel.app",
-    "127.0.0.1",
-    "http://localhost:5173",
+    "https://blog-mdshakib007-backend.vercel.app",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://blog.mdshakib007.vercel.app', 
-    'https://mdshakib007.vercel.app', 
-    'https://*.127.0.0.1',
-    "http://localhost:5173",
+    'https://mdshakib007.vercel.app',
+    'https://blog-mdshakib007-backend.vercel.app', 
 ]
 
 # Application definition
@@ -61,12 +57,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:5500",
-    "http://127.0.0.1:8000",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "https://blog.mdshakib007.vercel.app",
     "https://mdshakib007.vercel.app",
+    "https://blog-mdshakib007-backend.vercel.app",
 ]
 
 
