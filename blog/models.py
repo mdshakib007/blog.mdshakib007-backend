@@ -14,7 +14,7 @@ class Blog(models.Model):
     image = models.URLField(null=True, blank=True)
     body = models.TextField()
 
-    tags = models.ManyToManyField(Tag, related_name='blogs')
+    tags = models.ManyToManyField(Tag, related_name='blogs', blank=True)
     clap_count = models.PositiveIntegerField(default=0)
     reads = models.PositiveIntegerField(default=0)
 

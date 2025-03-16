@@ -16,6 +16,7 @@ DEBUG = env.bool("DEBUG", default=False)
 ALLOWED_HOSTS = [
     "mdshakib007.vercel.app",
     "blog-mdshakib007-backend.vercel.app",
+    "127.0.0.1",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
