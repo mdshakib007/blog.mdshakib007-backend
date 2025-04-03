@@ -26,17 +26,11 @@ class BlogListSerializer(serializers.ModelSerializer):
 
 class BlogDetailSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True, read_only=True)
-    comments = serializers.SerializerMethodField()
 
     class Meta:
         model = Blog
         fields = [
             'id', 'title', 'image',
             'body', 'tags', 'reads', 
-            'clap_count', 'comments', 
-            'created_at', 'updated_at',
+            'clap_count', 'created_at', 'updated_at',
         ]
-
-    def get_comments(self, obj):
-        recent_comments = obj.comments.order_by('-created_at')[:5]
-        return CommentSerializer(recent_comments, many=True).data

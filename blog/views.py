@@ -45,7 +45,7 @@ class BlogDetailView(APIView):
     def get(self, request, *args, **kwargs):
         pk = self.kwargs.get('pk')
         try:
-            blog = Blog.objects.filter(is_published=True).prefetch_related('comments').get(pk=pk)
+            blog = Blog.objects.filter(is_published=True).prefetch_related('tags').get(pk=pk)
         except Blog.DoesNotExist:
             return Response({"error": "Not Found"}, status=status.HTTP_404_NOT_FOUND)
         
@@ -82,3 +82,12 @@ class BlogCommentCreateView(APIView):
             serializer.save(blog=blog)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class BlogCommentListView(generics.ListAPIView):
+    serializer_class = CommentSerializer
+    pagination_class = BlogPagination  # Use the same pagination
+
+    def get_queryset(self):
+        pk = self.kwargs.get('pk')
+        return Comment.objects.filter(blog_id=pk).order_by('-created_at')
