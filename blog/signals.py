@@ -23,7 +23,6 @@ def send_newsletter(sender, instance, created, **kwargs):
 
             context = {
                 'title': instance.title,
-                'body': instance.body[:300] + "...",
                 'tags': instance.tags.all(),
                 'post_url': blog_url,
                 'unsubscribe_url': unsubscribe_url,
