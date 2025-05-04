@@ -9,7 +9,7 @@ from blog.models import Blog
 
 @receiver(post_save, sender=Blog)
 def send_newsletter(sender, instance, created, **kwargs):
-    if (created and instance.is_published) or (instance.is_published ):
+    if (created and instance.is_published) or (instance.is_published and (instance.updated_at == instance.created_at)):
         subscribers = Subscribe.objects.filter(is_active=True)
         recipient_list = [subscriber.email for subscriber in subscribers]
 
@@ -23,16 +23,13 @@ def send_newsletter(sender, instance, created, **kwargs):
 
             context = {
                 'title': instance.title,
-                'image': instance.image,
                 'body': instance.body[:300] + "...",
                 'tags': instance.tags.all(),
                 'post_url': blog_url,
                 'unsubscribe_url': unsubscribe_url,
             }
-
-            text_content = f"A new post \"{instance.title}\" has been published.\n\nRead it here: {blog_url}\n\nUnsubscribe: {unsubscribe_url}"
             html_content = render_to_string("send_blog_notification.html", context)
 
-            email = EmailMultiAlternatives(subject, text_content, from_email, [recipient])
+            email = EmailMultiAlternatives(subject, from_email, [recipient])
             email.attach_alternative(html_content, "text/html")
             email.send(fail_silently=False)

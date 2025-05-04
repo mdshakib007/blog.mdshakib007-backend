@@ -26,11 +26,6 @@
             margin: 0;
             font-size: 22px;
         }
-        .image-container img {
-            width: 100%;
-            max-height: auto;
-            display: block;
-        }
         .content {
             padding: 20px;
         }
@@ -83,12 +78,6 @@
         <div class="header">
             <h1>{{ title }}</h1>
         </div>
-
-        {% if image %}
-        <div class="image-container">
-            <img src="{{ image }}" alt="Blog Image">
-        </div>
-        {% endif %}
 
         <div class="content">
             {% if tags %}
