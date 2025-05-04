@@ -6,7 +6,7 @@ This is the backend API for the blog section of my personal portfolio. It provid
 
 | Method | Endpoint | Description |
 |--------|-----------------------------|---------------------------|
-| `GET` | `/admin/api/v1/` | Admin panel access |
+| `GET` | `/api/v1/admin/` | Admin panel access |
 | `GET` | `/api/v1/blog/posts/` | Retrieve all blog posts (paginated) |
 | `GET` | `/api/v1/blog/recent-posts/` | Fetch the 3 most recent posts |
 | `GET` | `/api/v1/blog/posts/{id}/` | Retrieve a single blog post (optimized) |

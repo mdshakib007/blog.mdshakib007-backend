@@ -3,7 +3,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
-from django.db.models import Count, Prefetch, F
+from django.db.models import Count, Prefetch, F, Sum
 from django.http import Http404
 from .models import Blog, Tag, Comment
 from .serializers import BlogListSerializer, BlogDetailSerializer, CommentSerializer, TagSerializer
@@ -91,3 +91,22 @@ class BlogCommentListView(generics.ListAPIView):
     def get_queryset(self):
         pk = self.kwargs.get('pk')
         return Comment.objects.filter(blog_id=pk).order_by('-created_at')
+
+
+class BlogStatsView(APIView):
+    def get(self, request, *args, **kwargs):
+        blogs = Blog.objects.filter(is_published=True)
+
+        total_blogs = blogs.count()
+        total_views = blogs.aggregate(total_reads=Sum('reads'))['total_reads'] or 0
+        total_claps = blogs.aggregate(total_claps=Sum('clap_count'))['total_claps'] or 0
+        total_comments = Comment.objects.count()
+        impression_prediction = total_views * 9  # or 8
+
+        return Response({
+            "total_blogs": total_blogs,
+            "total_views": total_views,
+            "total_claps": total_claps,
+            "total_comments": total_comments,
+            "impression_prediction": impression_prediction
+        }, status=status.HTTP_200_OK)

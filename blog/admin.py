@@ -18,8 +18,8 @@ class BlogAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['id', 'blog', 'name', 'short_body', 'created_at']
-    list_display_links = ['id', 'blog']
+    list_display = ['id', 'short_body', 'created_at']
+    list_display_links = ['id', 'short_body']
     list_filter = ['created_at']
     search_fields = ['name', 'body']
     ordering = ['-created_at']

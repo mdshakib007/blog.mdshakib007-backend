@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            padding: 30px;
+            color: #333;
+        }
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            background-color: #0073e6;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 22px;
+        }
+        .image-container img {
+            width: 100%;
+            max-height: auto;
+            display: block;
+        }
+        .content {
+            padding: 20px;
+        }
+        .tags {
+            margin: 10px 0;
+        }
+        .tag {
+            display: inline-block;
+            background: #e6f4ff;
+            color: #0073e6;
+            border: 1px solid #cce4ff;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 5px;
+            margin: 2px 4px 2px 0;
+        }
+        .body-preview {
+            margin-top: 10px;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #444;
+        }
+        .read-more {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .read-more a {
+            background-color: #0073e6;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .footer {
+            padding: 15px;
+            font-size: 12px;
+            text-align: center;
+            color: #888;
+            background-color: #f9f9f9;
+        }
+        .footer a {
+            color: #888;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>{{ title }}</h1>
+        </div>
+
+        {% if image %}
+        <div class="image-container">
+            <img src="{{ image }}" alt="Blog Image">
+        </div>
+        {% endif %}
+
+        <div class="content">
+            {% if tags %}
+            <div class="tags">
+                {% for tag in tags %}
+                    <span class="tag">{{ tag.name }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="body-preview">
+                {{ body|safe }}
+            </div>
+
+            <div class="read-more">
+                <a href="{{ post_url }}">Read Full Post</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            You are receiving this email because you subscribed to our blog.<br>
+            <a href="{{ unsubscribe_url }}">Unsubscribe</a> if you no longer wish to receive these emails.
+        </div>
+    </div>
+</body>
+</html>
